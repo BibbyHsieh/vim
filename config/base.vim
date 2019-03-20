@@ -36,7 +36,7 @@ set laststatus=2        " 是否显示状态栏(0,1,2)
 set ruler               " 在状态栏显示当前光标坐标
 set showmode            " 底行显示当前处于哪种模式
 set showcmd             " 命令模式下,在底行显示键入的指令
-set mouse=v             " 鼠标模式(n,v,i,c,h,a,r,A)
+set mouse=a             " 鼠标模式(n,v,i,c,h,a,r,A)
 set scrolloff=7         " 垂直滚动时光标距离顶部/底部的行数
 set sidescrolloff=7     " 水平滚动时光标距离边缘的字符数
 set showmatch           " 光标遇到括号时自动高亮对应的另一个括号
@@ -141,4 +141,18 @@ nmap <F8> :call RunShell("Generate GTAGS.*", 'find . -name "*.[chsS]" -o -name "
 nmap <F9> :call RunShell("Generate tags", "ctags -R --c-kinds=+lpxzL --c++-kinds=+lpxzLANU --fields=+niazS --extras=+q --output-format=e-ctags")<cr>
 " 生成cscope数据库文件快捷键F10 
 nmap <F10> :call RunShell("Generate cscope.*", 'find `pwd` -name "*.[chsS]" -o -name "*.cpp" -o -name "*.cc" -o -name "*.C", -o -name "*.cxx"> cscope.files && cscope -bkq')<cr>
+" <Ctrl + x> 剪下
+vmap <C-x> "+d
+" <Ctrl + c> 複製
+vmap <C-c> "+y
+" <Ctrl + v> 貼上
+vmap <C-v> "+p
+" vim 分頁功能快捷鍵
+nmap <C-S-tab> :tabprevious<CR>
+nmap <C-tab>   :tabnext<CR>
+nmap <C-t>     :tabnew<CR>
+nmap <C-w>     :tabclose<CR>
+imap <C-S-tab> <Esc>:tabprevious<CR>i
+imap <C-tab>   <Esc>:tabnext<CR>i
+imap <C-t>     <Esc>:tabnew<CR>
 

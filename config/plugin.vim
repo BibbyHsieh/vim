@@ -276,9 +276,9 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 " 弹出列表时选择前1项的快捷键(默认为<S-TAB>和<UP>)
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 " 主动补全, 默认为<C-Space>
-let g:ycm_key_invoke_completion = '<C-x>'
+let g:ycm_key_invoke_completion = '<C-z>'
 " 停止显示补全列表(防止列表影响视野),可以按<C-Space>重新弹出
-let g:ycm_key_list_stop_completion = ['<C-y>']
+let g:ycm_key_list_stop_completion = ['<C-/>']
 
 " 停止提示是否载入本地ycm_extra_conf文件
 let g:ycm_confirm_extra_conf = 0
@@ -302,7 +302,9 @@ let g:ycm_show_diagnostics_ui = 0
 let g:ycm_min_num_identifier_candidate_chars = 2
 " 设置以下语言自动弹出语义补全(默认需要输入'.->::'或者按主动补全组合键)
 let g:ycm_semantic_triggers =  {
-			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+                        \ 'c' : ['->', '.'],
+                        \ 'cpp,objcpp' : ['->', '.', '::'],
+			\ 'c,cpp,objcpp,python,java,go,erlang,perl': ['re!\w{2}'],
 			\ 'cs,lua,javascript': ['re!\w{2}'],
 			\ }
 " 白名单(以外的文件类型不分析补全)

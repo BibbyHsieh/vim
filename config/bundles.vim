@@ -45,12 +45,6 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer',
 Plug 'w0rp/ale', { 'for': ['s', 'S', 'c', 'h', 'C', 'cpp', 'cc', 'cxx', 'py', 'go', 'java', 'js', 'php', 'sh'] }
 
 " 主题配色
-Plug 'morhetz/gruvbox'
-Plug 'mhinz/vim-janah'
-Plug 'nanotech/jellybeans.vim'
 Plug 'tomasr/molokai'
-Plug 'jpo/vim-railscasts-theme'
-Plug 'tpope/vim-vividchalk'
-Plug 'joshdick/onedark.vim'
 
 call plug#end() 
