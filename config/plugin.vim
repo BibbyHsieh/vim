@@ -272,9 +272,9 @@ endif
 let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 
 " 弹出列表时选择第1项的快捷键(默认为<TAB>和<Down>)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_select_completion = ['<Down>']
 " 弹出列表时选择前1项的快捷键(默认为<S-TAB>和<UP>)
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:ycm_key_list_previous_completion = ['<Up>']
 " 主动补全, 默认为<C-Space>
 let g:ycm_key_invoke_completion = '<C-z>'
 " 停止显示补全列表(防止列表影响视野),可以按<C-Space>重新弹出

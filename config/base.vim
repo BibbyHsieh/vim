@@ -65,10 +65,11 @@ set tags=./tags;
 " =============================================================================
 " 编辑相关
 " =============================================================================
+set ai
 set tabstop=8           " 制表符宽度(Tab空格数)
 set softtabstop=8       " 软制表符宽度(按Tab键和Backspace键时光标跳转的空格数)
 set shiftwidth=8        " 缩进宽度(空格数)
-set expandtab           " 制表符替换为空格
+set noexpandtab         " 制表符替换为空格
 set autoindent          " 自动缩进
 set cindent             " 特别针对C语言的自动缩进
 set cinoptions=:0       " 自动缩进方案
@@ -148,11 +149,11 @@ vmap <C-c> "+y
 " <Ctrl + v> 貼上
 vmap <C-v> "+p
 " vim 分頁功能快捷鍵
-nmap <C-S-tab> :tabprevious<CR>
-nmap <C-tab>   :tabnext<CR>
-nmap <C-t>     :tabnew<CR>
-nmap <C-w>     :tabclose<CR>
-imap <C-S-tab> <Esc>:tabprevious<CR>i
-imap <C-tab>   <Esc>:tabnext<CR>i
-imap <C-t>     <Esc>:tabnew<CR>
+imap <C-p> :tabprevious<CR>
+imap <C-n> :tabnext<CR>
+imap <C-t> :tabnew<CR>
+imap <C-w> :tabclose<CR>
+imap <C-p> <Esc>:tabprevious<CR>i
+imap <C-n> <Esc>:tabnext<CR>i
+imap <C-t> <Esc>:tabnew<CR>
 
