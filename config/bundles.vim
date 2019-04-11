@@ -3,6 +3,9 @@
 " =============================================================================
 call plug#begin('~/.vim/plug')
 
+Plug 'vim-scripts/a.vim'
+Plug 'bronson/vim-trailing-whitespace'
+
 " vim中文帮助手册
 Plug 'yianwillis/vimcdoc'
 " C++语法高亮增强
