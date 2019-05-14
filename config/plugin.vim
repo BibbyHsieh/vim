@@ -327,9 +327,6 @@ let g:ycm_filetype_whitelist = {
 
 " ALE.vim
 " -----------------------------------------------------------------------------
-"普通模式下警告跳转快捷键
-nmap <silent> <Leader>p <Plug>(ale_previous_wrap)
-nmap <silent> <Leader>n <Plug>(ale_next_wrap)
 "<Leader>x触发/关闭语法检查
 nmap <Leader>x :ALEToggle<CR>
 "<Leader>y查看错误或警告的详细信息

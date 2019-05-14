@@ -3,6 +3,8 @@
 " =============================================================================
 call plug#begin('~/.vim/plug')
 
+Plug 'inkarkat/vim-ingo-library'
+Plug 'inkarkat/vim-mark'
 Plug 'vim-scripts/a.vim'
 Plug 'bronson/vim-trailing-whitespace'
 
