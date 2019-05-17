@@ -6,7 +6,7 @@ set encoding=utf-8      " 设置vim内部编码
 " 菜单显示编码
 set langmenu=zh_CN.UTF-8
 " 设置可识别文件编码列表
-set fileencodings=utf-8,gb2312,gbk,gb18030,cp936,utf-16,big5,latin1   
+set fileencodings=utf-8,gb2312,gbk,gb18030,cp936,utf-16,big5,latin1
 
 " =============================================================================
 " 基本配置
@@ -15,7 +15,7 @@ set fileencodings=utf-8,gb2312,gbk,gb18030,cp936,utf-16,big5,latin1
 filetype plugin indent on
 syntax on               " 打开语法高亮
 set t_Co=256            " 启用256色
-set nocompatible        " 不与vi兼容(采用vim自己的操作命令) 
+set nocompatible        " 不与vi兼容(采用vim自己的操作命令)
 set background=dark     " 设置背景色
 set cursorline          " 高亮光标所在行
 " 高亮行颜色
@@ -126,7 +126,7 @@ nnoremap + :resize +1<cr>
 nnoremap _ :resize -1<cr>
 nnoremap > :vertical resize +1<cr>
 nnoremap < :vertical resize -1<cr>
- 
+
 " shell命令调用函数
 function! RunShell(Msg, Shell)
 	echo a:Msg . '...'
@@ -138,9 +138,9 @@ endfunction
 nmap <F6> :vimgrep /<C-R>=expand("<cword>")<cr>/ **/*.c **/*.h<cr><C-o>:cw<cr>
 " 生成GTAGS数据库文件快捷键F8
 nmap <F8> :call RunShell("Generate GTAGS.*", 'find . -name "*.[chsS]" -o -name "*.cpp" -o -name "*.cc" -o -name "*.C", -o -name "*.cxx"> gtags.files && gtags')<cr>
-" 生成tags文件快捷键F9 
+" 生成tags文件快捷键F9
 nmap <F9> :call RunShell("Generate tags", "ctags -R --c-kinds=+lpxzL --c++-kinds=+lpxzLANU --fields=+niazS --extras=+q --output-format=e-ctags")<cr>
-" 生成cscope数据库文件快捷键F10 
+" 生成cscope数据库文件快捷键F10
 nmap <F10> :call RunShell("Generate cscope.*", 'find `pwd` -name "*.[chsS]" -o -name "*.cpp" -o -name "*.cc" -o -name "*.C", -o -name "*.cxx"> cscope.files && cscope -bkq')<cr>
 " <Ctrl + x> 剪下
 vmap <C-x> "+d
@@ -156,4 +156,3 @@ imap <C-w> :tabclose<CR>
 imap <C-p> <Esc>:tabprevious<CR>i
 imap <C-n> <Esc>:tabnext<CR>i
 imap <C-t> <Esc>:tabnew<CR>
-

@@ -27,25 +27,25 @@ let g:LookupFile_SortMethod=""
 let g:filename_tags=findfile("filename.tags", ".;")
 " 设置tags文件
 if filereadable(g:filename_tags)
-    let g:LookupFile_TagExpr='"'.g:filename_tags.'"'
+	let g:LookupFile_TagExpr='"'.g:filename_tags.'"'
 endif
 " 查找忽略大小写
 function! LookupFile_IgnoreCaseFunc(pattern)
-    let _tags = &tags
-    try
-        let &tags = eval(g:LookupFile_TagExpr)
-        let newpattern = '\c' . a:pattern
-        let tags = taglist(newpattern)
-    catch
-        echohl ErrorMsg | echo "Exception: " . v:exception | echohl NONE
-        return ""
-    finally
-        let &tags = _tags
-    endtry
+	let _tags = &tags
+	try
+		let &tags = eval(g:LookupFile_TagExpr)
+		let newpattern = '\c' . a:pattern
+		let tags = taglist(newpattern)
+	catch
+		echohl ErrorMsg | echo "Exception: " . v:exception | echohl NONE
+		return ""
+	finally
+		let &tags = _tags
+	endtry
 
-    " Show the matches for what is typed so far.
-    let files = map(tags, 'v:val["filename"]')
-    return files
+	" Show the matches for what is typed so far.
+	let files = map(tags, 'v:val["filename"]')
+	return files
 endfunction
 let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 
@@ -118,76 +118,74 @@ let NERDTreeHightCursorline=1
 " 更新cscope数据库函数
 function! UpdateCsdb(path)
 	execute "cd " . a:path
-    call job_start("cscope -bkq")
+	call job_start("cscope -bkq")
 	execute "cd -"
 	execute "silent cs reset"
 endfunction
 
 " 更新GTAGS数据库函数
 function! UpdateGtags(f)
-    let g:dir = fnamemodify(a:f, ':p:h')
-    execute "cd " . g:dir
-    call job_start("global -u")
+	let g:dir = fnamemodify(a:f, ':p:h')
+	execute "cd " . g:dir
+	call job_start("global -u")
 	execute "cd -"
 endfunction
 
 if executable('cscope')
-    " 获取GTAGS目录
-    let s:gtfile = system('global -pq')
+	" 获取GTAGS目录
+	let s:gtfile = system('global -pq')
 	" 向上递归寻找cscope.files
-    let s:csfile = findfile("cscope.out", ".;")
-
+	let s:csfile = findfile("cscope.out", ".;")
 	" 如果存在cscope.out则获取目录
-    if filereadable(s:csfile)
-        " 设置cscope模式标志
-        let g:csflag = 0
-        " 获取cscope.out目录
-        let s:pathlen = strridx(s:csfile, "cscope.out")
+	if filereadable(s:csfile)
+		" 设置cscope模式标志
+		let g:csflag = 0
+		" 获取cscope.out目录
+		let s:pathlen = strridx(s:csfile, "cscope.out")
 		let g:cspath = strpart(s:csfile, 0, s:pathlen)
 	" 如果存在cscope.out则获取目录
-    elseif s:gtfile != ""
-        " 设置cscope模式标志
-        let g:csflag = 1
-        " 获取GTAGS目录
+	elseif s:gtfile != ""
+		" 设置cscope模式标志
+		let g:csflag = 1
+		" 获取GTAGS目录
 		let g:gtpath = strpart(s:gtfile, 0, strlen(s:gtfile) - 1)
-    " 使用gutentags_plus
-    else
-        " 设置cscope模式标志
-        let g:csflag = 2
+		" 使用gutentags_plus
+	else
+		" 设置cscope模式标志
+		let g:csflag = 2
 	endif
 
-    " cscope程序位置
+	" cscope程序位置
 	if !exists("g:cspath") && executable('gtags-cscope')
-        " 设置cscope映射的程序
-        set csprg=/usr/local/bin/gtags-cscope
-        if g:csflag == 1
-            " 加载GTAGS
-            execute 'silent cs add ' . g:gtpath . '/GTAGS'
-            " 保存文件后自动更新GTAGS
-            autocmd BufWritePost * call UpdateGtags(expand('<afile>'))
-        else
-            execute 'silent GscopeKill'
-        endif
-    else
-        " 设置cscope映射的程序
-        set csprg=/usr/bin/cscope
-        " 自动命令查找结果不使用quickfix窗口
-        " autocmd BufReadPost * set cscopequickfix=""
-        " 保存文件后自动更新GTAGS
-        autocmd BufWritePost * call UpdateCsdb(g:cspath)
-        " 加载cscope.out
-    	set nocsverb
+		" 设置cscope映射的程序
+		set csprg=/usr/local/bin/gtags-cscope
+		if g:csflag == 1
+			" 加载GTAGS
+			execute 'silent cs add ' . g:gtpath . '/GTAGS'
+			" 保存文件后自动更新GTAGS
+			autocmd BufWritePost * call UpdateGtags(expand('<afile>'))
+		else
+			execute 'silent GscopeKill'
+		endif
+	else
+		" 设置cscope映射的程序
+		set csprg=/usr/bin/cscope
+		" 自动命令查找结果不使用quickfix窗口
+		" autocmd BufReadPost * set cscopequickfix=""
+		" 保存文件后自动更新GTAGS
+		autocmd BufWritePost * call UpdateCsdb(g:cspath)
+		" 加载cscope.out
+		set nocsverb
 		execute 'cs add ' . s:csfile
-    endif
-
-    " 显示添加数据库结果
-    set csverb
-    " 使用cstag命令代替tag命令 
-    set cst
-    " 优先搜索tags,失败再搜索cscope.out
-    set csto=0
-    " 显示文件路径全名 
-    set cspc=0
+	endif
+	" 显示添加数据库结果
+	set csverb
+	" 使用cstag命令代替tag命令
+	set cst
+	" 优先搜索tags,失败再搜索cscope.out
+	set csto=0
+	" 显示文件路径全名
+	set cspc=0
 endif
 
 " cscope当前窗口直接跳转快捷键
@@ -236,15 +234,15 @@ if executable('ctags')
 endif
 if g:csflag == 2 && executable('gtags-cscope')
 	let g:gutentags_modules += ['gtags_cscope']
-    " 光标定位于quickfix窗口
-    let g:gutentags_plus_switch = 1
+	" 光标定位于quickfix窗口
+	let g:gutentags_plus_switch = 1
 endif
 " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录 "
 let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = s:vim_tags
 " 检测 ~/.cache/tags 不存在就新建 "
 if !isdirectory(s:vim_tags)
-   silent! call mkdir(s:vim_tags, 'p')
+	silent! call mkdir(s:vim_tags, 'p')
 endif
 " 配置ctags的参数 "
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
@@ -259,18 +257,17 @@ let g:gutentags_auto_add_gtags_cscope = 0
 
 " vim-preview.vim
 if g:csflag == 2 && executable('gtags-cscope')
-    " p预览 大P关闭
-    autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
-    autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
-    noremap <Leader>u :PreviewScroll -1<cr> " 往上滚动预览窗口
-    noremap <Leader>d :PreviewScroll +1<cr> "  往下滚动预览窗口
+	" p预览 大P关闭
+	autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
+	autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
+	noremap <Leader>u :PreviewScroll -1<cr> " 往上滚动预览窗口
+	noremap <Leader>d :PreviewScroll +1<cr> "  往下滚动预览窗口
 endif
 
 " YouCompleteMe.vim
 " -----------------------------------------------------------------------------
-" 补全配置脚本 
+" 补全配置脚本
 let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-
 " 弹出列表时选择第1项的快捷键(默认为<TAB>和<Down>)
 let g:ycm_key_list_select_completion = ['<Down>']
 " 弹出列表时选择前1项的快捷键(默认为<S-TAB>和<UP>)
@@ -279,7 +276,6 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_key_invoke_completion = '<C-z>'
 " 停止显示补全列表(防止列表影响视野),可以按<C-Space>重新弹出
 let g:ycm_key_list_stop_completion = ['<C-/>']
-
 " 停止提示是否载入本地ycm_extra_conf文件
 let g:ycm_confirm_extra_conf = 0
 " 语法关键字补全
@@ -308,7 +304,7 @@ let g:ycm_semantic_triggers =  {
 			\ 'cs,lua,javascript': ['re!\w{2}'],
 			\ }
 " 白名单(以外的文件类型不分析补全)
-let g:ycm_filetype_whitelist = { 
+let g:ycm_filetype_whitelist = {
 			\ "s":1,
 			\ "S":1,
 			\ "c":1,
@@ -318,13 +314,12 @@ let g:ycm_filetype_whitelist = {
 			\ "cpp":1,
 			\ "py":1,
 			\ "go":1,
-			\ "java":1, 
+			\ "java":1,
 			\ "objc":1,
 			\ "sh":1,
 			\ "zsh":1,
 			\ "zimbu":1,
 			\ }
-
 " ALE.vim
 " -----------------------------------------------------------------------------
 "<Leader>x触发/关闭语法检查
@@ -359,7 +354,6 @@ let g:airline#extensions#ale#enabled = 1
 " 自定义error和warning标志
 "let g:ale_sign_error = '✗'
 "let g:ale_sign_warning = '⚡'
-
 " airline.vim
 " -----------------------------------------------------------------------------
 " 设置主题
@@ -381,7 +375,7 @@ nnoremap <Leader>, :bp<cr>
 let g:airline#extensions#whitespace#enabled = 0
 " 状态栏显示设置
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+	let g:airline_symbols = {}
 endif
 " powerline symbols
 let g:airline_left_sep = ''
