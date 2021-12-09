@@ -52,4 +52,4 @@ Plug 'w0rp/ale', { 'for': ['s', 'S', 'c', 'h', 'C', 'cpp', 'cc', 'cxx', 'py', 'g
 " 主题配色
 Plug 'tomasr/molokai'
 
-call plug#end() 
+call plug#end()

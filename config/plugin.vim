@@ -29,6 +29,8 @@ let g:filename_tags=findfile("filename.tags", ".;")
 if filereadable(g:filename_tags)
 	let g:LookupFile_TagExpr='"'.g:filename_tags.'"'
 endif
+
+let g:snipMate = { 'snippet_version' : 1 }
 " 查找忽略大小写
 function! LookupFile_IgnoreCaseFunc(pattern)
 	let _tags = &tags
@@ -54,6 +56,8 @@ let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 " 打开mru快捷键F4
 nmap  <F4> :MRU<cr>
 
+
+
 " man.vim
 " -----------------------------------------------------------------------------
 " 启动man插件
@@ -64,6 +68,8 @@ nmap <Leader>mm :Man <C-R>=expand("<cword>")<cr><cr>
 nmap <Leader>m2 :Man 2 <C-R>=expand("<cword>")<cr><cr>
 " man 3 光标定位的函数
 nmap <Leader>m3 :Man 3 <C-R>=expand("<cword>")<cr><cr>
+
+
 
 " taglist.vim
 " -----------------------------------------------------------------------------
@@ -88,9 +94,11 @@ let g:Tlist_Auto_Highlight_Tag=1
 " 打开时光标定位于taglist窗口
 let g:Tlist_GainFocus_On_ToggleOpen=1
 
+
+
 " NERDTree.vim
 " -----------------------------------------------------------------------------
-" 设置打开关闭快捷键F3 
+" 设置打开关闭快捷键F3
 nmap  <F3> :NERDTreeToggle<cr>
 " 窗口美化
 let NERDChristmasTree=1
@@ -112,6 +120,8 @@ let g:NERDTreeShowLineNumbers=1
 let g:NERDTreeQuitOnOpen=1
 " 高亮显示当前行目录或文件
 let NERDTreeHightCursorline=1
+
+
 
 " cscope配置
 " -----------------------------------------------------------------------------
@@ -198,28 +208,6 @@ nnoremap <Leader>fe :cs find e <C-R>=expand("<cword>")<cr><cr>
 nnoremap <Leader>ff :cs find f <C-R>=expand("<cfile>")<cr><cr>
 nnoremap <Leader>fi :cs find i <C-R>=expand("<cfile>")<cr><cr>
 nnoremap <Leader>fa :cs find a <C-R>=expand("<cword>")<cr><cr>
-
-" cscope跳转同时新建水平分割窗口快捷键
-nnoremap <Leader>ss :scs find s <C-R>=expand("<cword>")<cr><cr>
-nnoremap <Leader>sg :scs find g <C-R>=expand("<cword>")<cr><cr>
-nnoremap <Leader>sd :scs find d <C-R>=expand("<cword>")<cr><cr>
-nnoremap <Leader>sc :scs find c <C-R>=expand("<cword>")<cr><cr>
-nnoremap <Leader>st :scs find t <C-R>=expand("<cword>")<cr><cr>
-nnoremap <Leader>se :scs find e <C-R>=expand("<cword>")<cr><cr>
-nnoremap <Leader>sf :scs find f <C-R>=expand("<cfile>")<cr><cr>
-nnoremap <Leader>si :scs find i <C-R>=expand("<cfile>")<cr><cr>
-nnoremap <Leader>sa :scs find a <C-R>=expand("<cword>")<cr><cr>
-
-" cscope跳转同时新建垂直分割窗口快捷键
-nnoremap <Leader>vs :vert scs find s <C-R>=expand("<cword>")<cr><cr>
-nnoremap <Leader>vg :vert scs find g <C-R>=expand("<cword>")<cr><cr>
-nnoremap <Leader>vd :vert scs find d <C-R>=expand("<cword>")<cr><cr>
-nnoremap <Leader>vc :vert scs find c <C-R>=expand("<cword>")<cr><cr>
-nnoremap <Leader>vt :vert scs find t <C-R>=expand("<cword>")<cr><cr>
-nnoremap <Leader>ve :vert scs find e <C-R>=expand("<cword>")<cr><cr>
-nnoremap <Leader>vf :vert scs find f <C-R>=expand("<cfile>")<cr><cr>
-nnoremap <Leader>vi :vert scs find i <C-R>=expand("<cfile>")<cr><cr>
-nnoremap <Leader>va :vert scs find a <C-R>=expand("<cword>")<cr><cr>
 
 " gutentags.vim && gutentags_plus.vim
 " -----------------------------------------------------------------------------
@@ -332,28 +320,15 @@ nmap <Leader>y :ALEDetail<CR>
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-" 文件打开时不进行检查
-"let g:ale_lint_on_enter = 0
 " 文件修改时不进行检查
 let g:ale_lint_on_text_changed = 'never'
-" 文件保存时进行检查(默认)
-"let g:ale_lint_on_save = 1
-" 指定对应语言的检查工具
-"let g:ale_linters = {
-"            \   'c++': ['clang'],
-"            \   'c': ['clang'],
-"            \   'python': ['pylint'],
-"            \   'go': ['gofmt', 'golint'],
-"            \}
 " 关闭补全功能
 let g:ale_completion_enabled = 0
 " 使能airline状态栏扩展
 let g:airline#extensions#ale#enabled = 1
-" 禁用高亮显示
-"let g:ale_set_highlights = 0
-" 自定义error和warning标志
-"let g:ale_sign_error = '✗'
-"let g:ale_sign_warning = '⚡'
+
+
+
 " airline.vim
 " -----------------------------------------------------------------------------
 " 设置主题
@@ -364,10 +339,6 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 " 显示缓冲区编号
 let g:airline#extensions#tabline#buffer_nr_show = 1
-" tabline中当前buffer两端的分隔字符
-"let g:airline#extensions#tabline#left_sep = ' '
-" tabline中未激活buffer两端的分隔字符
-"let g:airline#extensions#tabline#left_alt_sep = '|'
 " 缓冲区切换快捷键
 nnoremap <Leader>. :bn<cr>
 nnoremap <Leader>, :bp<cr>
@@ -377,7 +348,9 @@ let g:airline#extensions#whitespace#enabled = 0
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
+
 " powerline symbols
+" " -----------------------------------------------------------------------------
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''

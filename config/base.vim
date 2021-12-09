@@ -21,16 +21,7 @@ set cursorline          " 高亮光标所在行
 " 高亮行颜色
 highlight CursorLine cterm=Bold ctermbg=Black ctermfg=NONE guibg=Black guifg=NONE
 "设置主题配色
-"colorscheme gruvbox
-"colorscheme janah
-"colorscheme jellybeans
 colorscheme molokai
-"colorscheme railscasts
-"colorscheme vividchalk
-"colorscheme onedark
-"colorscheme desert
-"colorscheme torte
-"colorscheme ron
 set number              " 显示行号
 set laststatus=2        " 是否显示状态栏(0,1,2)
 set ruler               " 在状态栏显示当前光标坐标
