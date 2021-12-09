@@ -31,7 +31,8 @@
     git pull
     cd src/
     make distclean # if you build Vim before
-    ./configure --with-features=huge \
+    ./configure --prefix=$HOME/.local \
+                --with-features=huge \
                 --enable-pythoninterp=yes \
                 --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu/ \
                 --enable-python3interp=yes \
@@ -46,23 +47,19 @@
                 --enable-gdb
     make -j8
     sudo make install
-## 將vim8設為默認編輯器
-    export PATH=<$PWD/vim>:$PATH
-    (Test vim function)
-    vim ~/.bashrc
-    (Add one line) export PATH=<$PWD/vim>:$PATH
+
 ## 安裝universal-ctags
     git clone https://github.com/universal-ctags/ctags.git
     cd ctags
     ./autogen.sh
-    ./configure
+    ./configure --prefix=$HOME/.local
     make -j8
     sudo make install
 ## 安裝gnu-global
     wget http://tamacom.com/global/global-6.6.2.tar.gz
     tar xvf global-6.6.2.tar.gz
     cd global-6.6.2
-    ./configure
+    ./configure --prefix=$HOME/.local
     make -j8
     sudo make install
 ## 安裝vim-plug
