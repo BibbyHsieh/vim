@@ -1,6 +1,3 @@
-" =============================================================================
-" 插件配置
-" =============================================================================
 " lookupfile.vim
 " -----------------------------------------------------------------------------
 " 生存filename.tags快捷键F7
@@ -51,6 +48,8 @@ function! LookupFile_IgnoreCaseFunc(pattern)
 endfunction
 let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 
+
+
 " mru.vim
 " -----------------------------------------------------------------------------
 " 打开mru快捷键F4
@@ -74,7 +73,7 @@ nmap <Leader>m3 :Man 3 <C-R>=expand("<cword>")<cr><cr>
 " taglist.vim
 " -----------------------------------------------------------------------------
 " 设置打开关闭快捷键F2
-nmap  <F2> :TlistToggle<cr>
+nmap <F2> :TlistToggle<cr>
 " 自动更新tags列表
 let g:Tlist_Auto_Update=1
 " 始终解析文件中的tag,不管taglist窗口有没有打开
@@ -99,7 +98,7 @@ let g:Tlist_GainFocus_On_ToggleOpen=1
 " NERDTree.vim
 " -----------------------------------------------------------------------------
 " 设置打开关闭快捷键F3
-nmap  <F3> :NERDTreeToggle<cr>
+nmap <F3> :NERDTreeToggle<cr>
 " 窗口美化
 let NERDChristmasTree=1
 " 自动调整光标到窗口中心
@@ -209,6 +208,9 @@ nnoremap <Leader>ff :cs find f <C-R>=expand("<cfile>")<cr><cr>
 nnoremap <Leader>fi :cs find i <C-R>=expand("<cfile>")<cr><cr>
 nnoremap <Leader>fa :cs find a <C-R>=expand("<cword>")<cr><cr>
 
+
+
+
 " gutentags.vim && gutentags_plus.vim
 " -----------------------------------------------------------------------------
 " 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归 "
@@ -233,11 +235,9 @@ if !isdirectory(s:vim_tags)
 	silent! call mkdir(s:vim_tags, 'p')
 endif
 " 配置ctags的参数 "
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+lpxzLANU']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+lpxzL']
-" 如果使用universal ctags需要增加下面一行
-let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+lpx']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+lpx']
 " 禁用 gutentags 自动加载 gtags 数据库的行为
 " 避免多个项目数据库相互干扰
 " 使用plus插件解决问题
@@ -251,81 +251,6 @@ if g:csflag == 2 && executable('gtags-cscope')
 	noremap <Leader>u :PreviewScroll -1<cr> " 往上滚动预览窗口
 	noremap <Leader>d :PreviewScroll +1<cr> "  往下滚动预览窗口
 endif
-
-" YouCompleteMe.vim
-" -----------------------------------------------------------------------------
-" 补全配置脚本
-let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-" 弹出列表时选择第1项的快捷键(默认为<TAB>和<Down>)
-let g:ycm_key_list_select_completion = ['<Down>']
-" 弹出列表时选择前1项的快捷键(默认为<S-TAB>和<UP>)
-let g:ycm_key_list_previous_completion = ['<Up>']
-" 主动补全, 默认为<C-Space>
-let g:ycm_key_invoke_completion = '<C-z>'
-" 停止显示补全列表(防止列表影响视野),可以按<C-Space>重新弹出
-let g:ycm_key_list_stop_completion = ['<C-/>']
-" 停止提示是否载入本地ycm_extra_conf文件
-let g:ycm_confirm_extra_conf = 0
-" 语法关键字补全
-let g:ycm_seed_identifiers_with_syntax = 1
-" 开启YCM 基于标签引擎
-let g:ycm_collect_identifiers_from_tags_files = 1
-" 从第2个键入字符就开始罗列匹配项
-let g:ycm_min_num_of_chars_for_completion = 2
-" 开启输入注释时补全
-let g:ycm_complete_in_comments = 1
-" 开启输入字符串时补全
-let g:ycm_complete_in_strings = 1
-" 开启注释和字符串中收集补全
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-" 关闭函数预览
-let g:ycm_add_preview_to_completeopt = 0
-" 关闭代码诊断
-let g:ycm_show_diagnostics_ui = 0
-" 设置标识符补全最小字符数
-let g:ycm_min_num_identifier_candidate_chars = 2
-" 设置以下语言自动弹出语义补全(默认需要输入'.->::'或者按主动补全组合键)
-let g:ycm_semantic_triggers =  {
-                        \ 'c' : ['->', '.'],
-                        \ 'cpp,objcpp' : ['->', '.', '::'],
-			\ 'c,cpp,objcpp,python,java,go,erlang,perl': ['re!\w{2}'],
-			\ 'cs,lua,javascript': ['re!\w{2}'],
-			\ }
-" 白名单(以外的文件类型不分析补全)
-let g:ycm_filetype_whitelist = {
-			\ "s":1,
-			\ "S":1,
-			\ "c":1,
-			\ "C":1,
-			\ "cc":1,
-			\ "cxx":1,
-			\ "cpp":1,
-			\ "py":1,
-			\ "go":1,
-			\ "java":1,
-			\ "objc":1,
-			\ "sh":1,
-			\ "zsh":1,
-			\ "zimbu":1,
-			\ }
-" ALE.vim
-" -----------------------------------------------------------------------------
-"<Leader>x触发/关闭语法检查
-nmap <Leader>x :ALEToggle<CR>
-"<Leader>y查看错误或警告的详细信息
-nmap <Leader>y :ALEDetail<CR>
-"始终开启标志列
-"let g:ale_sign_column_always = 1
-" 错误警告消息格式
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-" 文件修改时不进行检查
-let g:ale_lint_on_text_changed = 'never'
-" 关闭补全功能
-let g:ale_completion_enabled = 0
-" 使能airline状态栏扩展
-let g:airline#extensions#ale#enabled = 1
 
 
 
@@ -348,6 +273,9 @@ let g:airline#extensions#whitespace#enabled = 0
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
+
+
+
 
 " powerline symbols
 " " -----------------------------------------------------------------------------

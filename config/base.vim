@@ -18,10 +18,11 @@ set t_Co=256            " 启用256色
 set nocompatible        " 不与vi兼容(采用vim自己的操作命令)
 set background=dark     " 设置背景色
 set cursorline          " 高亮光标所在行
+set colorcolumn=80
 " 高亮行颜色
 highlight CursorLine cterm=Bold ctermbg=Black ctermfg=NONE guibg=Black guifg=NONE
 "设置主题配色
-colorscheme molokai
+colorscheme seoul256
 set number              " 显示行号
 set laststatus=2        " 是否显示状态栏(0,1,2)
 set ruler               " 在状态栏显示当前光标坐标
@@ -91,6 +92,9 @@ autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \     exe "normal g'\"" |
     \ endif
+    
+" 啟用每行超過80列的字元提示（字型變藍並加下劃線）
+au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
 " =============================================================================
 " 快捷键
@@ -124,6 +128,9 @@ function! RunShell(Msg, Shell)
 	call system(a:Shell)
 	echon 'done'
 endfunction
+
+" 常規模式下輸入 cS 清除行尾空格
+nmap cS :%s/\s\+$//g<CR>:noh<CR>
 
 " vimgrep查找字符串
 nmap <F6> :vimgrep /<C-R>=expand("<cword>")<cr>/ **/*.c **/*.h<cr><C-o>:cw<cr>
