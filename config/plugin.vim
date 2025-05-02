@@ -1,5 +1,6 @@
 " lookupfile.vim
 " -----------------------------------------------------------------------------
+let g:csflag = 0
 " 生存filename.tags快捷键F7
 nmap <F7> :call RunShell("Generate filename.tags", "genftag")<cr>
 " 映射LookupFile快捷键
@@ -185,7 +186,9 @@ if executable('cscope')
 		autocmd BufWritePost * call UpdateCsdb(g:cspath)
 		" 加载cscope.out
 		set nocsverb
-		execute 'cs add ' . s:csfile
+		if filereadable(s:csfile)
+		    execute 'cs add ' . s:csfile
+		endif
 	endif
 	" 显示添加数据库结果
 	set csverb

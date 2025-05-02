@@ -1,81 +1,38 @@
 # vimrc
 
-## 建立HOME底下的local資料夾
-    mkdir ~/.local
-
 ## 以下需要請IT協助安裝 或 自己有root權限
-###### 移除exuberant-ctags
-    sudo apt-get --purge remove exuberant-ctags
-###### 移除舊版vim及其相關套件
-    sudo apt-get --purge remove vim*
-###### 自動清除無用軟體
-    sudo apt-get --purge autoremove
-    sudo apt-get autoclean
-###### 更新軟體來源
-    sudo apt-get update
-###### 安裝checkinstall
-    sudo apt-get install checkinstall
-###### 安裝pyton
-    sudo apt-get -f install python3-dev
-###### 安裝libncurses5-dev
-    sudo apt-get install libncurses5-dev
-###### 安裝編譯工具集
-    sudo apt-get install cmake build-essential
-###### 安裝自動配置工具
-    sudo apt-get install autoconf
-###### 安裝cscope和global
-    sudo apt-get install cscope
-    sudo apt-get install global
-###### 安裝powerline字体
-    sudo apt-get install fonts-powerline
+## 更新系統：
+sudo apt update && sudo apt upgrade -y
+## 安裝 Vim： 確保 Vim 支援 Python 3（YouCompleteMe 要求）。安裝完整版 Vim：
+sudo apt install vim -y
+## 確認版本 >= 7.4.1578 且包含 +python3。
+## 若無 Python 3 支援，安裝 vim-nox 或 vim-gtk3：
+sudo apt install vim-nox -y
+## 安裝 tmux：
+sudo apt install tmux -y
+## 安裝 tmuxinator： tmuxinator 依賴 Ruby，因此先安裝 Ruby 和 gem：
+sudo apt install ruby ruby-dev -y
+sudo gem install tmuxinator
+## 創建 tmuxinator 配置目錄：
+mkdir -p ~/.tmuxinator
+## 安裝 git：
+sudo apt install git -y
+## 配置 git（可選）：
+git config --global user.name "Bibby Hsieh"
+git config --global user.email "bibby.hsieh771@gmail.com"
+## 安裝 C/C++ 開發工具： 為 driver 開發和 YouCompleteMe 安裝必要工具：
+sudo apt install build-essential cmake python3-dev clang clangd linux-headers-$(uname -r) -y
+## 安裝 vim-plug：
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-## 安裝Python3.8
-    Python 官網下載一包 python3.8 source code
-    解壓縮放進HOME
-    ./configure --prefix=$HOME/.local
-    make -j8 && make install
+## YouCompleteMe相關：
+## 編譯YCM
+cd ~/.vim/plug/YouCompleteMe
+python3 install.py --clangd-completer
 
-## 增加HOME底下.local/bin進PATH 確保使用到local bin
-    export PATH=~/.local/bin:$PATH
+cp ~/.vim/plug/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py ~/.vim/.ycm_extra_conf.py
 
-## 安裝vim8
-    git clone https://github.com/vim/vim.git
-    cd vim/
-    git pull
-    cd src/
-    make distclean #if you build Vim before
-    ./configure --prefix=$HOME/.local \
-                --with-features=huge \
-                --enable-python3interp=yes \
-                --with-python3-command=python3.8 \
-                --enable-rubyinterp=yes \
-                --enable-luainterp=yes \
-                --enable-perlinterp=yes \
-                --enable-tclinterp=yes \
-                --enable-multibyte \
-                --enable-cscope \
-                --enable-gtk3-check
-    make -j8 && make install
-
-## 安裝universal-ctags
-    git clone https://github.com/universal-ctags/ctags.git
-    cd ctags
-    ./autogen.sh
-    ./configure --prefix=$HOME/.local
-    make -j8
-    make install
-
-## 安裝gnu-global
-    wget http://tamacom.com/global/global-6.6.2.tar.gz
-    tar xvf global-6.6.2.tar.gz
-    cd global-6.6.2
-    ./configure --prefix=$HOME/.local
-    make -j8
-    make install
-
-## 安裝vim-plug
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 ## 快捷鍵
 **F2**： 啟動左側Taglist視窗  

@@ -8,6 +8,8 @@ Plug 'inkarkat/vim-mark'
 Plug 'vim-scripts/a.vim'
 Plug 'bronson/vim-trailing-whitespace'
 
+Plug 'ycm-core/YouCompleteMe'
+
 Plug 'yianwillis/vimcdoc'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-scripts/mru.vim'
